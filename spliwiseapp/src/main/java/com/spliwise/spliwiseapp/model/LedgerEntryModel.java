@@ -33,20 +33,18 @@ public class LedgerEntryModel {
 	public void persistLedgerEntry(LedgerEntry ledgerEntry) {
 		ledgerTable.put(ledgerEntry.getLedgerEntryId(), ledgerEntry);
 	}
-	
-	public List<LedgerEntry> getUserLedgers(String userId)
-	{
+
+	public List<LedgerEntry> getUserLedgers(String userId) {
 		List<LedgerEntry> ledgerEntries = new ArrayList<LedgerEntry>();
-		LedgerEntry ledgerEntry ;
-		for (String ledgerId : this.ledgerTable.keySet())
-		{
+		LedgerEntry ledgerEntry;
+		for (String ledgerId : this.ledgerTable.keySet()) {
 			ledgerEntry = this.ledgerTable.get(ledgerId);
-			if (ledgerEntry.getPayeeUserId().equalsIgnoreCase(userId) || ledgerEntry.getPayerUserId().equalsIgnoreCase(userId))
-			{
+			if (ledgerEntry.getPayeeUserId().equalsIgnoreCase(userId)
+					|| ledgerEntry.getPayerUserId().equalsIgnoreCase(userId)) {
 				ledgerEntries.add(ledgerEntry);
 			}
 		}
-		
+
 		return ledgerEntries;
 	}
 }

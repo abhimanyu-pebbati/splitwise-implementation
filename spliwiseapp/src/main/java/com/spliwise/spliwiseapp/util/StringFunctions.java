@@ -18,7 +18,7 @@ public class StringFunctions {
 
 		if (email.indexOf("@") > email.indexOf(".com"))
 			return false;
-		
+
 		return true;
 	}
 

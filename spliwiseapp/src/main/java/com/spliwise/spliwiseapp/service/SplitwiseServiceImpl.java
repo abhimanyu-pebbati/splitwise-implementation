@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +31,8 @@ public class SplitwiseServiceImpl implements SplitwiseService {
 
 	private LedgerEntryModel ledgerEntryModel = LedgerEntryModel.getInstance();
 
+	private static Logger logger = LoggerFactory.getLogger(SplitwiseServiceImpl.class);
+
 	@Override
 	public User addUser(UserRequest userRequest) {
 		return userFactory.createUser(userRequest.getFullName(), userRequest.getEmail());
@@ -44,12 +48,11 @@ public class SplitwiseServiceImpl implements SplitwiseService {
 
 	@Override
 	public List<LedgerEntry> addTransaction(TransactionRequest transactionRequest) {
-		Transaction transaction = transactionFactory.createTransaction(transactionRequest.getSplitFunction(),
-				transactionRequest.getPayers(), transactionRequest.getPayees());
+		Transaction transaction = transactionFactory.createTransaction(transactionRequest);
 		List<LedgerEntry> ledgerEntries = transaction.getSplitFunction().computeLedgerEntries(transaction.getPayers(),
 				transaction.getPayees());
 		ledgerEntryModel.persistLedgerEntries(ledgerEntries);
-		System.out.println(ledgerEntries);
+		logger.info(ledgerEntries.toString());
 
 		return ledgerEntries;
 	}
@@ -58,7 +61,6 @@ public class SplitwiseServiceImpl implements SplitwiseService {
 	public List<LedgerEntry> viewUserBalances(String userId) {
 		List<LedgerEntry> ledgerEntries = ledgerEntryModel.getUserLedgers(userId);
 		Map<String, LedgerEntry> map = new HashMap<String, LedgerEntry>();
-		LedgerEntry ledgerEntry;
 
 		for (LedgerEntry le : ledgerEntries) {
 			if (le.getPayeeUserId().equalsIgnoreCase(userId)) {

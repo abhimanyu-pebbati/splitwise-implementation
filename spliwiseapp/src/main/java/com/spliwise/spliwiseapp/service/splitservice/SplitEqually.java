@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.spliwise.spliwiseapp.entity.transaction.LedgerEntry;
 import com.spliwise.spliwiseapp.entity.transaction.Payee;
 import com.spliwise.spliwiseapp.entity.transaction.Payer;
+import com.spliwise.spliwiseapp.request.TransactionRequest;
 import com.spliwise.spliwiseapp.service.lendowemap.LendOweMapper;
 import com.spliwise.spliwiseapp.service.lendowemap.SortMapper;
 
@@ -23,4 +24,10 @@ public class SplitEqually implements SplitFunction {
 		SplitFunction splitByShare = new SplitByShare();
 		return splitByShare.computeLedgerEntries(payers, payees);
 	}
+
+	@Override
+	public boolean validateTransactionRequest(TransactionRequest transactionRequest) {
+		return true;
+	}
+
 }
