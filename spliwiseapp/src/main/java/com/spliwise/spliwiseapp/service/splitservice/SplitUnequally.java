@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import com.spliwise.spliwiseapp.entity.transaction.BalanceOwed;
 import com.spliwise.spliwiseapp.entity.transaction.LedgerEntry;
@@ -17,20 +16,17 @@ import com.spliwise.spliwiseapp.entity.transaction.Payer;
 import com.spliwise.spliwiseapp.exceptionhandling.exception.InvalidTransactionException;
 import com.spliwise.spliwiseapp.request.TransactionRequest;
 import com.spliwise.spliwiseapp.service.lendowemap.LendOweMapper;
-import com.spliwise.spliwiseapp.service.lendowemap.SortMapper;
 
-public class SplitUnequally implements SplitFunction {
+public class SplitUnequally extends SplitFunction {
 
-	@Autowired
-	LendOweMapper lendOweMapper;
 	private static Logger logger = LoggerFactory.getLogger(SplitUnequally.class);
 
 	public SplitUnequally() {
-		this.lendOweMapper = new SortMapper();
+		super();
 	}
 
 	public SplitUnequally(LendOweMapper lendOweMapper) {
-		this.lendOweMapper = lendOweMapper;
+		super(lendOweMapper);
 	}
 
 	@Override

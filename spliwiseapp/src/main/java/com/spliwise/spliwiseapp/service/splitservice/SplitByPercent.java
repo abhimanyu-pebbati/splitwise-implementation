@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import com.spliwise.spliwiseapp.entity.transaction.LedgerEntry;
 import com.spliwise.spliwiseapp.entity.transaction.Payee;
@@ -12,20 +11,17 @@ import com.spliwise.spliwiseapp.entity.transaction.Payer;
 import com.spliwise.spliwiseapp.exceptionhandling.exception.InvalidTransactionException;
 import com.spliwise.spliwiseapp.request.TransactionRequest;
 import com.spliwise.spliwiseapp.service.lendowemap.LendOweMapper;
-import com.spliwise.spliwiseapp.service.lendowemap.SortMapper;
 
-public class SplitByPercent implements SplitFunction {
+public class SplitByPercent extends SplitFunction {
 
-	@Autowired
-	LendOweMapper lendOweMapper;
 	private static Logger logger = LoggerFactory.getLogger(SplitByPercent.class);
 
 	public SplitByPercent() {
-		this.lendOweMapper = new SortMapper();
+		super();
 	}
 
 	public SplitByPercent(LendOweMapper lendOweMapper) {
-		this.lendOweMapper = lendOweMapper;
+		super(lendOweMapper);
 	}
 
 	@Override

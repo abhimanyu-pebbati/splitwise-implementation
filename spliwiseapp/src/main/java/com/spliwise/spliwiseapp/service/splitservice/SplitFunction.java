@@ -6,10 +6,22 @@ import com.spliwise.spliwiseapp.entity.transaction.LedgerEntry;
 import com.spliwise.spliwiseapp.entity.transaction.Payee;
 import com.spliwise.spliwiseapp.entity.transaction.Payer;
 import com.spliwise.spliwiseapp.request.TransactionRequest;
+import com.spliwise.spliwiseapp.service.lendowemap.LendOweMapper;
+import com.spliwise.spliwiseapp.service.lendowemap.SortMapper;
 
-public interface SplitFunction {
+public abstract class SplitFunction {
 
-	public List<LedgerEntry> computeLedgerEntries(List<Payer> payers, List<Payee> payees);
+	LendOweMapper lendOweMapper;
 
-	public boolean validateTransactionRequest(TransactionRequest transactionRequest);
+	public SplitFunction() {
+		this.lendOweMapper = new SortMapper();
+	}
+
+	public SplitFunction(LendOweMapper lendOweMapper) {
+		this.lendOweMapper = lendOweMapper;
+	}
+
+	public abstract List<LedgerEntry> computeLedgerEntries(List<Payer> payers, List<Payee> payees);
+
+	public abstract boolean validateTransactionRequest(TransactionRequest transactionRequest);
 }

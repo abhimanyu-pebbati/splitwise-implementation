@@ -2,26 +2,20 @@ package com.spliwise.spliwiseapp.service.splitservice;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.spliwise.spliwiseapp.entity.transaction.LedgerEntry;
 import com.spliwise.spliwiseapp.entity.transaction.Payee;
 import com.spliwise.spliwiseapp.entity.transaction.Payer;
 import com.spliwise.spliwiseapp.request.TransactionRequest;
 import com.spliwise.spliwiseapp.service.lendowemap.LendOweMapper;
-import com.spliwise.spliwiseapp.service.lendowemap.SortMapper;
 
-public class SplitEqually implements SplitFunction {
-
-	@Autowired
-	LendOweMapper lendOweMapper;
+public class SplitEqually extends SplitFunction {
 
 	public SplitEqually() {
-		this.lendOweMapper = new SortMapper();
+		super();
 	}
 
 	public SplitEqually(LendOweMapper lendOweMapper) {
-		this.lendOweMapper = lendOweMapper;
+		super(lendOweMapper);
 	}
 
 	@Override
