@@ -14,7 +14,15 @@ import com.spliwise.spliwiseapp.service.lendowemap.SortMapper;
 public class SplitEqually implements SplitFunction {
 
 	@Autowired
-	LendOweMapper lendOweMapper = new SortMapper();
+	LendOweMapper lendOweMapper;
+
+	SplitEqually() {
+		this.lendOweMapper = new SortMapper();
+	}
+
+	SplitEqually(LendOweMapper lendOweMapper) {
+		this.lendOweMapper = lendOweMapper;
+	}
 
 	@Override
 	public List<LedgerEntry> computeLedgerEntries(List<Payer> payers, List<Payee> payees) {

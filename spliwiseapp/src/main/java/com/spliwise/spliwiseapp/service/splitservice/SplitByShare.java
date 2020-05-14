@@ -17,8 +17,16 @@ import com.spliwise.spliwiseapp.service.lendowemap.SortMapper;
 public class SplitByShare implements SplitFunction {
 
 	@Autowired
-	LendOweMapper lendOweMapper = new SortMapper();
+	LendOweMapper lendOweMapper;
 	private static Logger logger = LoggerFactory.getLogger(SplitByShare.class);
+
+	SplitByShare() {
+		this.lendOweMapper = new SortMapper();
+	}
+
+	SplitByShare(LendOweMapper lendOweMapper) {
+		this.lendOweMapper = lendOweMapper;
+	}
 
 	@Override
 	public List<LedgerEntry> computeLedgerEntries(List<Payer> payers, List<Payee> payees) {

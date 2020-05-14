@@ -22,8 +22,16 @@ import com.spliwise.spliwiseapp.service.lendowemap.SortMapper;
 public class SplitUnequally implements SplitFunction {
 
 	@Autowired
-	LendOweMapper lendOweMapper = new SortMapper();
+	LendOweMapper lendOweMapper;
 	private static Logger logger = LoggerFactory.getLogger(SplitUnequally.class);
+
+	SplitUnequally() {
+		this.lendOweMapper = new SortMapper();
+	}
+
+	SplitUnequally(LendOweMapper lendOweMapper) {
+		this.lendOweMapper = lendOweMapper;
+	}
 
 	@Override
 	public List<LedgerEntry> computeLedgerEntries(List<Payer> payers, List<Payee> payees) {

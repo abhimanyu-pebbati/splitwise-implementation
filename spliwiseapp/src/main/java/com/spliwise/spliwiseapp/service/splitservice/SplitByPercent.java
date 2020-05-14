@@ -17,30 +17,37 @@ import com.spliwise.spliwiseapp.service.lendowemap.SortMapper;
 public class SplitByPercent implements SplitFunction {
 
 	@Autowired
-	LendOweMapper lendOweMapper = new SortMapper();
+	LendOweMapper lendOweMapper;
 	private static Logger logger = LoggerFactory.getLogger(SplitByPercent.class);
+
+	SplitByPercent() {
+		this.lendOweMapper = new SortMapper();
+	}
+
+	SplitByPercent(LendOweMapper lendOweMapper) {
+		this.lendOweMapper = lendOweMapper;
+	}
 
 	@Override
 	public List<LedgerEntry> computeLedgerEntries(List<Payer> payers, List<Payee> payees) {
 		double totalAmount = 0;
-		
+
 		for (Payer payer : payers)
 			totalAmount += payer.getAmount();
-		
+
 		Payee payee;
 		double amount, countAmount = 0;
-		for (int i =0 ; i<payees.size()-1; i++)
-		{
+		for (int i = 0; i < payees.size() - 1; i++) {
 			payee = payees.get(i);
-			amount = totalAmount * (payee.getAmount()*0.01);
+			amount = totalAmount * (payee.getAmount() * 0.01);
 			countAmount += amount;
 			payee.setAmount(amount);
 		}
-		
-		payee = payees.get(payees.size()-1);
+
+		payee = payees.get(payees.size() - 1);
 		amount = totalAmount - countAmount;
 		payee.setAmount(amount);
-		
+
 		SplitFunction splitUnequally = new SplitUnequally();
 		return splitUnequally.computeLedgerEntries(payers, payees);
 	}
@@ -57,7 +64,7 @@ public class SplitByPercent implements SplitFunction {
 			logger.error(err);
 			throw new InvalidTransactionException(err);
 		}
-		
+
 		return true;
 	}
 }
