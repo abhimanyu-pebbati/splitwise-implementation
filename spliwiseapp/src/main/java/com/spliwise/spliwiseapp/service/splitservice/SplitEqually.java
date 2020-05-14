@@ -29,7 +29,7 @@ public class SplitEqually implements SplitFunction {
 		for (Payee payee : payees)
 			payee.setAmount(1);
 
-		SplitFunction splitByShare = new SplitByShare();
+		SplitFunction splitByShare = new SplitByShare(this.lendOweMapper);
 		return splitByShare.computeLedgerEntries(payers, payees);
 	}
 

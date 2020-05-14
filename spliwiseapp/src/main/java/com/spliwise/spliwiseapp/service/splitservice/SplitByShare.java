@@ -51,7 +51,7 @@ public class SplitByShare implements SplitFunction {
 		amount = totalAmount - countAmount;
 		payee.setAmount(amount);
 
-		SplitFunction splitUnequally = new SplitUnequally();
+		SplitFunction splitUnequally = new SplitUnequally(this.lendOweMapper);
 		return splitUnequally.computeLedgerEntries(payers, payees);
 	}
 
