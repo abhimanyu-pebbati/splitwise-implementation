@@ -20,11 +20,11 @@ public class SplitByPercent implements SplitFunction {
 	LendOweMapper lendOweMapper;
 	private static Logger logger = LoggerFactory.getLogger(SplitByPercent.class);
 
-	SplitByPercent() {
+	public SplitByPercent() {
 		this.lendOweMapper = new SortMapper();
 	}
 
-	SplitByPercent(LendOweMapper lendOweMapper) {
+	public SplitByPercent(LendOweMapper lendOweMapper) {
 		this.lendOweMapper = lendOweMapper;
 	}
 

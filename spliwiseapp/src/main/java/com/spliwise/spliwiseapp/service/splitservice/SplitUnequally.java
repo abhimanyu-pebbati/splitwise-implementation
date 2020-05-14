@@ -25,11 +25,11 @@ public class SplitUnequally implements SplitFunction {
 	LendOweMapper lendOweMapper;
 	private static Logger logger = LoggerFactory.getLogger(SplitUnequally.class);
 
-	SplitUnequally() {
+	public SplitUnequally() {
 		this.lendOweMapper = new SortMapper();
 	}
 
-	SplitUnequally(LendOweMapper lendOweMapper) {
+	public SplitUnequally(LendOweMapper lendOweMapper) {
 		this.lendOweMapper = lendOweMapper;
 	}
 

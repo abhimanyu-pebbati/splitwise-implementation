@@ -16,11 +16,11 @@ public class SplitEqually implements SplitFunction {
 	@Autowired
 	LendOweMapper lendOweMapper;
 
-	SplitEqually() {
+	public SplitEqually() {
 		this.lendOweMapper = new SortMapper();
 	}
 
-	SplitEqually(LendOweMapper lendOweMapper) {
+	public SplitEqually(LendOweMapper lendOweMapper) {
 		this.lendOweMapper = lendOweMapper;
 	}
 

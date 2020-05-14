@@ -20,11 +20,11 @@ public class SplitByShare implements SplitFunction {
 	LendOweMapper lendOweMapper;
 	private static Logger logger = LoggerFactory.getLogger(SplitByShare.class);
 
-	SplitByShare() {
+	public SplitByShare() {
 		this.lendOweMapper = new SortMapper();
 	}
 
-	SplitByShare(LendOweMapper lendOweMapper) {
+	public SplitByShare(LendOweMapper lendOweMapper) {
 		this.lendOweMapper = lendOweMapper;
 	}
 
